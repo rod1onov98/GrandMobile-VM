@@ -24,9 +24,11 @@ attention: for store-ops (0x9c, 0xd3) pointer is on top and value below.
 only store_i64 (0x1b) is opposite — pointer in below64, value in top64. very tricky moment,
 i lost 2 hours on it while was reversing.
 
+```text
 ------------------------------------------------------------
 opcode | mnemonic            | operand | what it do
 ------------------------------------------------------------
+```
 0x0c   | u8_trunc_i32        |    -    | top32 = (uint8_t)top32
 0x0e   | sub_i64             |    -    | below64 = below64 - top64; then pop 8
 0x11   | u8_mask_i32         |    -    | top32 = (uint8_t)top32  (same as 0x0c, dublicate)
@@ -72,6 +74,7 @@ opcode | mnemonic            | operand | what it do
 0xe3   | nop                 |    -    | (same like 0x6c)
 0xf1   | push_i64_const      |  imm64  | push imm64
 
+```text
 ------------------------------------------------------------
 some observations about how this vm works:
 
@@ -108,3 +111,4 @@ idioms that we can see in this concrete bytecode:
 
 if you want understand full algoritm of encryption — look on encrypt_native_raw() in vm.cpp,
 its already reversed from this bytecode and works 1-to-1 with vm.
+```
