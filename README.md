@@ -110,5 +110,5 @@ idioms that we can see in this concrete bytecode:
   4a dd dd dd dd                     — conditional jump if top is not zero
 ```
 
-if you want understand full algoritm of encryption — look on encrypt_native_raw() in vm.cpp,
+if you want understand full algoritm of encryption — look on encrypt_native_raw() in vm.hpp,
 its already reversed from this bytecode and works 1-to-1 with vm.
