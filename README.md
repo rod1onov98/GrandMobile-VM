@@ -1,6 +1,5 @@
 # GrandMobile-VM
-reversed virtual machine who used by CR:MP mobile project "Grand Mobile". 
-
+Reverse-Engineering CR:MP mobile virtual machine who used by project "Grand Mobile".
 
 # VM Description 
 
@@ -28,7 +27,6 @@ i lost 2 hours on it while was reversing.
 ------------------------------------------------------------
 opcode | mnemonic            | operand | what it do
 ------------------------------------------------------------
-```
 0x0c   | u8_trunc_i32        |    -    | top32 = (uint8_t)top32
 0x0e   | sub_i64             |    -    | below64 = below64 - top64; then pop 8
 0x11   | u8_mask_i32         |    -    | top32 = (uint8_t)top32  (same as 0x0c, dublicate)
@@ -74,8 +72,9 @@ opcode | mnemonic            | operand | what it do
 0xe3   | nop                 |    -    | (same like 0x6c)
 0xf1   | push_i64_const      |  imm64  | push imm64
 
-```text
 ------------------------------------------------------------
+```
+
 some observations about how this vm works:
 
 1) push always increments sp by 8, even when we push i32. small values are stored
@@ -96,6 +95,7 @@ some observations about how this vm works:
 
 idioms that we can see in this concrete bytecode:
 
+```text
   df ii ii ii ii                     — push 32-bit constant
   84 oo oo oo oo                     — take address of local[offs]
   84 oo oo oo oo 34                  — load i32 from local
@@ -108,7 +108,7 @@ idioms that we can see in this concrete bytecode:
                                        to add proper zext-only opcode
   a4 dd dd dd dd                     — unconditional jump by displacement dd
   4a dd dd dd dd                     — conditional jump if top is not zero
+```
 
 if you want understand full algoritm of encryption — look on encrypt_native_raw() in vm.cpp,
 its already reversed from this bytecode and works 1-to-1 with vm.
-```
